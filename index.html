@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional IT Support Ticket Management System by Bethuel Simiyu.">
+  <title>Marcus IT Support | Support Ticket Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- AUTH -->
+  <main class="login-container" id="loginSection">
+    <div class="login-brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <strong>Marcus IT Support</strong>
+        <span>Professional support management</span>
+      </div>
+    </div>
+
+    <div class="login-layout">
+      <section class="login-intro">
+        <span class="eyebrow">IT SUPPORT MANAGEMENT</span>
+        <h1>Resolve technical issues <span>faster.</span></h1>
+        <p>Submit, track and manage IT support requests from one secure workspace.</p>
+        <div class="intro-features">
+          <div><span>✓</span> Ticket tracking</div>
+          <div><span>✓</span> Priority management</div>
+          <div><span>✓</span> Admin analytics</div>
+          <div><span>✓</span> CSV reporting</div>
+        </div>
+        <div class="developer-mini">
+          <div class="avatar">BS</div>
+          <div><strong>Bethuel Simiyu</strong><small>Computer Technology • IT Support</small></div>
+        </div>
+      </section>
+
+      <section class="login-card">
+        <div class="card-icon">↗</div>
+        <span class="eyebrow">WELCOME BACK</span>
+        <h2 id="authTitle">Login</h2>
+        <p class="auth-subtitle">Access your support workspace.</p>
+
+        <form id="authForm">
+          <div class="form-group" id="nameGroup" style="display:none;">
+            <label for="authName">Full Name</label>
+            <input type="text" id="authName" placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label for="authEmail">Email address</label>
+            <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="Enter your password" autocomplete="current-password" required>
+          </div>
+          <div class="form-group" id="roleGroup" style="display:none;">
+            <label for="authRole">Account type</label>
+            <select id="authRole">
+              <option value="User">User</option>
+            </select>
+          </div>
+          <button type="submit" id="authSubmit" class="primary-btn">Login</button>
+        </form>
+
+        <p class="auth-toggle" id="authToggle">Don't have an account? <a href="#">Register</a></p>
+        <p class="security-note">🔒 Your session is protected with token-based authentication.</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- APPLICATION -->
+  <div class="app-shell" id="appContainer" style="display:none;">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <div class="brand-mark">M</div>
+        <div><strong>Marcus IT Support</strong><span>Support Management Portal</span></div>
+      </a>
+      <div class="user-info" id="userInfo">
+        <div class="user-avatar" id="userAvatar">BS</div>
+        <div class="user-copy"><strong id="userDisplay"></strong><small>Signed in</small></div>
+        <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero-panel">
+        <div>
+          <span class="eyebrow">SUPPORT OPERATIONS</span>
+          <h1>IT Support Dashboard</h1>
+          <p>Monitor requests, prioritize incidents and keep your team productive.</p>
+        </div>
+        <div class="hero-badge">● System Online</div>
+      </section>
+
+      <section class="dashboard">
+        <div class="stat-card"><div class="stat-icon">▣</div><div><span>Total Tickets</span><strong id="totalTickets">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon">◷</div><div><span>Open</span><strong id="openTickets">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon">!</div><div><span>High Priority</span><strong id="highTickets">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon">✓</div><div><span>Resolved</span><strong id="resolvedTickets">0</strong></div></div>
+      </section>
+
+      <!-- ADMIN ANALYTICS -->
+      <section class="admin-section" id="adminSection">
+        <div class="section-heading"><div><span class="eyebrow">ADMINISTRATION</span><h2>Performance overview</h2></div><span class="section-tag">Admin only</span></div>
+        <div class="admin-grid">
+          <div class="admin-card"><span>Tickets by department</span><div id="deptStats" class="breakdown-list"></div></div>
+          <div class="admin-card"><span>Tickets by priority</span><div id="priorityStats" class="breakdown-list"></div></div>
+          <div class="admin-card"><span>Average resolution time</span><strong id="avgResolutionTime">--</strong><small>Across resolved tickets</small></div>
+        </div>
+        <div class="charts-grid">
+          <div class="chart-card"><h3>Tickets by Department</h3><div class="chart-wrap"><canvas id="deptChart"></canvas></div></div>
+          <div class="chart-card"><h3>Tickets by Priority</h3><div class="chart-wrap"><canvas id="priorityChart"></canvas></div></div>
+        </div>
+        <div class="recent-activity"><h3>Recent Activity</h3><ul id="recentList"></ul></div>
+      </section>
+
+      <!-- CREATE TICKET -->
+      <section class="support-card">
+        <div class="section-heading"><div><span class="eyebrow">NEW REQUEST</span><h2>Submit IT Support Request</h2><p>Tell the support team what you need help with.</p></div><div class="ticket-tip">Expected response: based on priority</div></div>
+        <form id="supportForm" class="ticket-form">
+          <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" placeholder="Enter your full name" required></div>
+          <div class="form-group"><label for="department">Department</label><select id="department" required><option value="">Select department</option><option>ICT</option><option>Finance</option><option>Human Resources</option><option>Administration</option><option>Sales</option><option>Other</option></select></div>
+          <div class="form-group full"><label for="problem">Describe the problem</label><textarea id="problem" rows="5" placeholder="Describe the issue, what you were doing when it occurred, and any error message..." required></textarea></div>
+          <div class="form-group full"><label>Priority</label><div class="priority-options">
+            <label class="priority low-option"><input type="radio" name="priority" value="Low" required><span>Low</span><small>General request</small></label>
+            <label class="priority medium-option"><input type="radio" name="priority" value="Medium"><span>Medium</span><small>Work affected</small></label>
+            <label class="priority high-option"><input type="radio" name="priority" value="High"><span>High</span><small>Critical disruption</small></label>
+          </div></div>
+          <div class="form-actions full"><button type="submit" class="primary-btn">Submit Support Ticket <span>→</span></button><div id="message"></div></div>
+        </form>
+      </section>
+
+      <!-- TICKETS -->
+      <section class="tickets-section">
+        <div class="tickets-header">
+          <div><span class="eyebrow">REQUEST HISTORY</span><h2>Support Tickets</h2></div>
+          <div class="header-actions"><input type="text" id="searchTicket" placeholder="Search tickets..."><button type="button" id="exportCSV" class="export-btn">Export CSV</button></div>
+        </div>
+        <div class="filters">
+          <select id="filterStatus"><option value="">All Statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option></select>
+          <select id="filterPriority"><option value="">All Priorities</option><option>Low</option><option>Medium</option><option>High</option></select>
+          <select id="filterDepartment"><option value="">All Departments</option><option>ICT</option><option>Finance</option><option>Human Resources</option><option>Administration</option><option>Sales</option><option>Other</option></select>
+          <button type="button" id="clearFilters" class="clear-btn">Clear filters</button>
+        </div>
+        <div class="table-container"><table><thead><tr><th>Ticket</th><th>Name</th><th>Department</th><th>Problem</th><th>Priority</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="ticketTable"></tbody></table></div>
+      </section>
+
+      <!-- DEVELOPER / CONTACT -->
+      <section class="developer-section">
+        <div class="developer-content">
+          <div class="developer-avatar">BS</div>
+          <div><span class="eyebrow">DEVELOPER & CONTACT</span><h2>Bethuel Simiyu</h2><p>Computer Technology professional focused on IT support, system administration, hardware troubleshooting, software installation, networking and practical technology solutions.</p></div>
+        </div>
+        <div class="contact-grid">
+          <a href="mailto:simiyubethuel01@gmail.com"><span>✉</span><div><small>Email</small><strong>simiyubethuel01@gmail.com</strong></div></a>
+          <a href="tel:+254700806988"><span>☎</span><div><small>Phone</small><strong>0700 806 988</strong></div></a>
+          <a href="https://github.com/Bethymarcus2001_github" target="_blank" rel="noopener noreferrer"><span>◈</span><div><small>GitHub</small><strong>Bethymarcus2001_github</strong></div></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>Marcus IT Support</strong><span>Professional IT support & ticket management</span></div>
+      <div>Built by <strong>Bethuel Simiyu</strong> • © 2026</div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
