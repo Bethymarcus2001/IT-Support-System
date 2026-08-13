@@ -206,8 +206,17 @@ app.post('/api/tickets', authMiddleware, (req, res) => {
       return res.status(400).json({ message: 'Invalid priority' });
     }
 
-    const result = db.prepare('INSERT INTO tickets (name, department, problem, priority, status) VALUES (?, ?, ?, ?, \"Open\")')
-      .run(name, department, problem, priority);
+    const result = db.prepare(`
+  INSERT INTO tickets
+  (user_id, name, department, problem, priority, status)
+  VALUES (?, ?, ?, ?, ?, 'Open')
+`).run(
+  req.user.id,
+  req.user.name,
+  department,
+  problem,
+  priority
+);
 
     const ticket = serializeTicket(db.prepare('SELECT * FROM tickets WHERE id = ?').get(result.lastInsertRowid));
     res.status(201).json(ticket);
