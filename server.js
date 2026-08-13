@@ -5,14 +5,19 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Database = require('better-sqlite3');
-
+const fs = require("fs");
 dotenv.config();
-
 const app = express();
 const port = process.env.PORT || 5000;
-const dbPath = process.env.DB_PATH || path.join(__dirname, 'data', 'it-support.db');
-const db = new Database(dbPath);
 
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'data', 'it-support.db');
+const dbDir = path.dirname(dbPath);
+
+if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+}
+
+const db = new Database(dbPath);
 app.disable('x-powered-by');
 db.pragma('foreign_keys = ON');
 
