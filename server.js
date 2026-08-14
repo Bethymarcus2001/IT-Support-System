@@ -226,7 +226,7 @@ app.post('/api/tickets', authMiddleware, async (req, res) => {
 const ticketId = result.lastInsertRowid;
     try {
       await resend.emails.send({
-        from: 'Marcus IT Support <onboarding@resend.dev>',
+        from: 'Systems Support <onboarding@resend.dev>',
         to: process.env.ADMIN_EMAIL,
         subject: `🚨 New IT Support Ticket #${ticketId} - ${priority} Priority`,
         html: `
@@ -244,7 +244,7 @@ const ticketId = result.lastInsertRowid;
           <hr>
 
           <p>
-            Please log in to the Marcus IT Support dashboard
+            Please log in to the Systems Support dashboard
             to review and manage this ticket.
           </p>
         `

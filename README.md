@@ -1,4 +1,4 @@
-# Marcus IT Support System
+# Systems Support System
 
 A professional IT support ticket management application developed by **Bethuel Simiyu**.
 
