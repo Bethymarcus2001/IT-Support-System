@@ -1,4 +1,5 @@
 const express = require('express');
+const { Resend } = require('resend');
 const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -7,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const Database = require('better-sqlite3');
 const fs = require("fs");
 dotenv.config();
+const resend = new Resend(process.env.RESEND_API_KEY);
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -64,6 +66,11 @@ if (adminEmail && adminPassword) {
   }
 }
 
+console.log(
+  adminEmail
+    ? `Admin account configured: ${adminEmail}`
+    : 'ADMIN_EMAIL is not configured'
+);
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
@@ -192,8 +199,7 @@ app.get('/api/tickets', authMiddleware, (req, res) => {
     res.status(500).json({ message: 'Failed to retrieve tickets' });
   }
 });
-
-app.post('/api/tickets', authMiddleware, (req, res) => {
+app.post('/api/tickets', authMiddleware, async (req, res) => {
   try {
     const { name, department, problem, priority } = req.body;
 
@@ -217,7 +223,37 @@ app.post('/api/tickets', authMiddleware, (req, res) => {
   problem,
   priority
 );
+const ticketId = result.lastInsertRowid;
+    try {
+      await resend.emails.send({
+        from: 'Marcus IT Support <onboarding@resend.dev>',
+        to: process.env.ADMIN_EMAIL,
+        subject: `🚨 New IT Support Ticket #${ticketId} - ${priority} Priority`,
+        html: `
+          <h2>🚨 New IT Support Ticket</h2>
 
+          <p><strong>Ticket:</strong> #${ticketId}</p>
+          <p><strong>Employee:</strong> ${req.user.name}</p>
+          <p><strong>Department:</strong> ${department}</p>
+          <p><strong>Priority:</strong> ${priority}</p>
+          <p><strong>Status:</strong> Open</p>
+
+          <h3>Problem Reported</h3>
+          <p>${problem}</p>
+
+          <hr>
+
+          <p>
+            Please log in to the Marcus IT Support dashboard
+            to review and manage this ticket.
+          </p>
+        `
+      });
+
+      console.log(`Email alert sent for ticket #${ticketId}`);
+    } catch (emailError) {
+      console.error('Email notification failed:', emailError);
+    }
     const ticket = serializeTicket(db.prepare('SELECT * FROM tickets WHERE id = ?').get(result.lastInsertRowid));
     res.status(201).json(ticket);
   } catch (error) {
