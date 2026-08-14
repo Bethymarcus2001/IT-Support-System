@@ -118,7 +118,23 @@
           <div class="chart-card"><h3>Tickets by Priority</h3><div class="chart-wrap"><canvas id="priorityChart"></canvas></div></div>
         </div>
         <div class="recent-activity"><h3>Recent Activity</h3><ul id="recentList"></ul></div>
-      </section>
+<div class="recent-activity notifications-panel">
+  <div class="notification-header">
+    <div>
+      <span class="eyebrow">LIVE ALERTS</span>
+      <h3>🔔 Notifications</h3>
+    </div>
+    <span id="notificationCount" class="notification-count">0</span>
+  </div>
+
+  <ul id="notificationList" class="notification-list">
+    <li class="empty-notification">
+      No new notifications
+    </li>
+  </ul>
+</div>
+    
+  </section>
 
       <!-- CREATE TICKET -->
       <section class="support-card">

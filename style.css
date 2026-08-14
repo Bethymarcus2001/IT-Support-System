@@ -29,3 +29,101 @@ a{text-decoration:none;color:inherit}
 .developer-section{background:linear-gradient(135deg,#fff,#f8fbff);display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.developer-content{display:flex;gap:15px;align-items:flex-start}.developer-avatar{width:58px;height:58px;flex:0 0 auto}.developer-content h2{font-size:24px;margin:4px 0}.developer-content p{color:#64748b;font-size:13px;max-width:650px}.contact-grid{display:grid;gap:9px}.contact-grid a{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff}.contact-grid a:hover{border-color:#93c5fd;transform:translateX(2px)}.contact-grid a>span{width:32px;height:32px;border-radius:8px;background:#eff6ff;color:#2563eb;display:grid;place-items:center}.contact-grid small{display:block;color:#94a3b8;font-size:10px}.contact-grid strong{font-size:12px}.site-footer{border-top:1px solid var(--line);background:#fff;padding:22px 5%;display:flex;justify-content:space-between;gap:15px;color:#94a3b8;font-size:11px}.site-footer strong{color:#334155}.site-footer span{display:block;margin-top:3px}
 @media(max-width:950px){.login-layout{grid-template-columns:1fr;gap:35px}.login-intro{max-width:none}.login-intro h1{font-size:48px}.dashboard{grid-template-columns:repeat(2,1fr)}.admin-grid,.developer-section{grid-template-columns:1fr}.charts-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.login-container{padding:22px 5%;background:#081536}.login-brand{margin-bottom:30px}.login-intro{display:none}.login-card{padding:25px}.topbar{padding:0 4%;height:68px}.brand span,.user-copy{display:none}.container{width:94%;padding-top:18px}.hero-panel{padding:24px;align-items:flex-start;flex-direction:column}.hero-panel h1{font-size:26px}.dashboard{grid-template-columns:1fr 1fr;gap:10px}.stat-card{padding:14px}.stat-card strong{font-size:22px}.admin-section,.support-card,.tickets-section,.developer-section{padding:20px}.ticket-form{grid-template-columns:1fr}.full{grid-column:auto}.priority-options{grid-template-columns:1fr}.form-actions{align-items:stretch;flex-direction:column}.form-actions .primary-btn{max-width:none}.tickets-header{align-items:stretch;flex-direction:column}.header-actions{flex-direction:column}.tickets-header input{width:100%}.site-footer{flex-direction:column}.developer-content{align-items:flex-start}}
+
+/* =========================================
+   LIVE NOTIFICATIONS
+========================================= */
+
+.notifications-panel {
+  margin-top: 24px;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.notification-header h3 {
+  margin: 4px 0 0;
+  font-size: 22px;
+}
+
+.notification-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 50px;
+  background: #ef4444;
+  color: white;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--soft);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.notification-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15,23,42,.08);
+}
+
+.notification-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eff6ff;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.notification-content p {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.notification-content small {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.empty-notification {
+  padding: 22px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}

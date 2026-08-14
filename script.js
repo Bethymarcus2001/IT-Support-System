@@ -212,8 +212,58 @@ function updateDashboard() {
   document.getElementById("highTickets").textContent = highTickets.length;
   const resolvedTickets = tickets.filter(function(t) { return t.status === "Resolved"; });
   document.getElementById("resolvedTickets").textContent = resolvedTickets.length;
+updateNotifications();
 }
 
+function updateNotifications() {
+  const notificationList = document.getElementById("notificationList");
+  const notificationCount = document.getElementById("notificationCount");
+
+  if (!notificationList || !notificationCount) return;
+
+  const recentTickets = tickets.slice(0, 5);
+
+  notificationCount.textContent = recentTickets.length;
+
+  if (recentTickets.length === 0) {
+    notificationList.innerHTML = `
+      <li class="empty-notification">
+        No new notifications
+      </li>
+    `;
+    return;
+  }
+
+  notificationList.innerHTML = recentTickets.map(function(ticket) {
+    const priorityIcon =
+      ticket.priority === "High" ? "🚨" :
+      ticket.priority === "Medium" ? "⚠️" : "🔵";
+
+    return `
+      <li class="notification-item">
+        <div class="notification-icon">
+          ${priorityIcon}
+        </div>
+
+        <div class="notification-content">
+          <strong>
+            ${ticket.priority === "High"
+              ? "High Priority Ticket"
+              : "New Support Ticket"}
+          </strong>
+
+          <p>
+            Ticket #${ticket.id} — ${ticket.department}
+          </p>
+
+          <small>
+            ${ticket.name} · ${ticket.status}
+          </small>
+        </div>
+      </li>
+    `;
+  }).join("");
+}
 supportForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
