@@ -44,10 +44,14 @@ db.exec(`
     resolved_at DATETIME
   );
 `);
-
 const ticketColumns = db.prepare("PRAGMA table_info(tickets)").all().map(c => c.name);
+
 if (!ticketColumns.includes('user_id')) {
   db.exec('ALTER TABLE tickets ADD COLUMN user_id INTEGER');
+}
+
+if (!ticketColumns.includes('assigned_to')) {
+  db.exec('ALTER TABLE tickets ADD COLUMN assigned_to INTEGER');
 }
 
 const adminEmail = process.env.ADMIN_EMAIL;
@@ -182,6 +186,30 @@ app.post('/api/auth/register', async (req, res) => {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error during registration' });
   }
+
+app.get('/api/users/support', authMiddleware, (req, res) => {
+  try {
+    if (req.user.role !== 'Admin') {
+      return res.status(403).json({
+        message: 'Administrator access is required'
+      });
+    }
+
+    const users = db.prepare(`
+      SELECT id, name, email, role
+      FROM users
+      WHERE role IN ('User', 'Support')
+      ORDER BY name ASC
+    `).all();
+
+    res.json(users);
+  } catch (error) {
+    console.error('Get support users error:', error);
+    res.status(500).json({
+      message: 'Failed to retrieve support users'
+    });
+  }
+});
 });
 
 app.get('/api/tickets', authMiddleware, (req, res) => {

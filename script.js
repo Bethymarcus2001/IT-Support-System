@@ -212,58 +212,8 @@ function updateDashboard() {
   document.getElementById("highTickets").textContent = highTickets.length;
   const resolvedTickets = tickets.filter(function(t) { return t.status === "Resolved"; });
   document.getElementById("resolvedTickets").textContent = resolvedTickets.length;
-updateNotifications();
 }
 
-function updateNotifications() {
-  const notificationList = document.getElementById("notificationList");
-  const notificationCount = document.getElementById("notificationCount");
-
-  if (!notificationList || !notificationCount) return;
-
-  const recentTickets = tickets.slice(0, 5);
-
-  notificationCount.textContent = recentTickets.length;
-
-  if (recentTickets.length === 0) {
-    notificationList.innerHTML = `
-      <li class="empty-notification">
-        No new notifications
-      </li>
-    `;
-    return;
-  }
-
-  notificationList.innerHTML = recentTickets.map(function(ticket) {
-    const priorityIcon =
-      ticket.priority === "High" ? "🚨" :
-      ticket.priority === "Medium" ? "⚠️" : "🔵";
-
-    return `
-      <li class="notification-item">
-        <div class="notification-icon">
-          ${priorityIcon}
-        </div>
-
-        <div class="notification-content">
-          <strong>
-            ${ticket.priority === "High"
-              ? "High Priority Ticket"
-              : "New Support Ticket"}
-          </strong>
-
-          <p>
-            Ticket #${ticket.id} — ${ticket.department}
-          </p>
-
-          <small>
-            ${ticket.name} · ${ticket.status}
-          </small>
-        </div>
-      </li>
-    `;
-  }).join("");
-}
 supportForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
@@ -348,8 +298,9 @@ authForm.addEventListener("submit", async function(e) {
       data = await apiPost('/auth/login', { email, password });
     } else {
       const name = document.getElementById("authName").value.trim();
+      const role = document.getElementById("authRole").value;
       if (!name) { alert("Please enter your full name"); return; }
-      data = await apiPost('/auth/register', { name, email, password });
+      data = await apiPost('/auth/register', { name, email, password, role });
     }
 
     authToken = data.token;
@@ -382,9 +333,7 @@ async function showApp() {
   appContainer.style.display = "block";
   userInfo.style.display = "flex";
 
-  userDisplay.textContent = `${currentUser.name} (${currentUser.role})`;
-  document.getElementById("userAvatar").textContent = (currentUser.name || "U")
-    .split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
+  userDisplay.innerHTML = `${currentUser.name} <span class="user-role">(${currentUser.role})</span>`;
   document.getElementById("name").value = currentUser.name;
 
   const adminSection = document.getElementById("adminSection");

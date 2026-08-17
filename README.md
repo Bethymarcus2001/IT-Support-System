@@ -1,29 +1,6 @@
-# Systems Support System
+# IT Support System
 
-A professional IT support ticket management application developed by **Bethuel Simiyu**.
-
-## Features
-
-- Secure login and registration
-- User/admin roles
-- IT support ticket submission
-- Low, Medium and High priority
-- Ticket status management
-- Admin analytics and charts
-- Search and filtering
-- CSV export for administrators
-- Responsive professional interface
-- Developer contact section
-- User tickets are separated from administrator ticket views
-
-## Tech Stack
-
-- HTML5 / CSS3 / JavaScript
-- Node.js / Express
-- SQLite with better-sqlite3
-- JWT authentication
-- bcrypt password hashing
-- Chart.js
+A simple ticketing web app with login, ticket submission, admin analytics, and ticket management.
 
 ## Run locally
 
@@ -32,27 +9,18 @@ npm install
 npm start
 ```
 
-Open `http://localhost:5000`.
+Then open http://localhost:5000.
 
-## Environment variables
+## Deploying to public hosting
 
-Create a `.env` file locally or configure these in your hosting provider:
+This app is ready to be deployed to services like Render or Railway.
 
-```env
-PORT=5000
-JWT_SECRET=replace-with-a-long-random-secret
-ADMIN_EMAIL=your-admin-email
-ADMIN_PASSWORD=your-strong-admin-password
-```
+### Render
+1. Create a new Web Service.
+2. Connect this repository.
+3. Set the build command to `npm install`.
+4. Set the start command to `npm start`.
+5. Add an environment variable:
+   - `JWT_SECRET=your-secret`
 
-**Do not commit `.env` or real credentials to GitHub.**
-
-## Developer
-
-**Bethuel Simiyu**  
-BSc Computer Technology / IT Support & Systems
-
-- Email: simiyubethuel01@gmail.com
-- Phone: 0700 806 988
-- GitHub: Bethymarcus2001_github
-
+The app will serve the frontend and API from the same host.
