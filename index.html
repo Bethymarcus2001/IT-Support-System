@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style.css?v=5">
   <meta name="description" content="Systems Support — professional IT service desk and support management system.">
   <title>Systems Support | Professional IT Service Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 <section id="loginSection" class="landing-shell">
   <nav class="site-nav">
     <a class="brand" href="#">
-      <span class="brand-mark">M</span>
+      <span class="brand-mark">S</span>
       <span>
         <strong>Systems Support</strong>
         <small>Service Desk</small>
@@ -34,18 +34,19 @@
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse-dot"></span> Professional IT Support Management</div>
-        <h1>Fast, reliable IT support <span>when you need it.</span></h1>
-        <p>Submit, track and manage technical support requests from one professional service desk. Keep every issue visible, organised and moving toward resolution.</p>
+        <div class="eyebrow"><span class="pulse-dot"></span> Your always-on technology partner</div>
+        <h1>Get back to work.<br><span>We’ll handle the tech.</span></h1>
+        <p>A smarter service desk for every IT request. Submit an issue, see progress in real time and get clear updates from first report to final resolution.</p>
         <div class="hero-actions">
-          <a class="primary-btn" href="#login-card">Submit a Support Ticket <span>→</span></a>
-          <a class="secondary-btn" href="#services">Explore Services</a>
+          <a class="primary-btn" href="#login-card">Get Support Now <span>→</span></a>
+          <a class="secondary-btn" href="#services">How we help</a>
         </div>
         <div class="trust-row">
           <div><strong>24/7</strong><span>Ticket access</span></div>
           <div><strong>3 steps</strong><span>To resolution</span></div>
           <div><strong>100%</strong><span>Trackable</span></div>
         </div>
+        <div class="availability-note"><span class="availability-ring"></span> Support desk online · Typical first response under 30 minutes</div>
       </div>
 
       <div class="hero-visual">
@@ -62,6 +63,10 @@
             <div><span>Open</span><strong>24</strong><small>Need attention</small></div>
             <div><span>Resolved</span><strong>104</strong><small>Completed</small></div>
           </div>
+          <div class="preview-activity">
+            <div class="activity-label"><span>Resolution activity</span><strong>+18.4%</strong></div>
+            <div class="activity-chart" aria-label="Resolution activity chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
           <div class="preview-ticket">
             <div class="ticket-icon">IT</div>
             <div class="ticket-info"><strong>Network connectivity issue</strong><span>Finance Department · #TKT-0128</span></div>
@@ -75,6 +80,10 @@
         </div>
         <div class="floating-card"><span class="check-icon">✓</span><div><strong>Issue resolved</strong><small>Ticket #TKT-0126</small></div></div>
       </div>
+    </section>
+
+    <section class="platform-strip" aria-label="Support platform features">
+      <span>SECURE ACCESS</span><b></b><span>REAL-TIME UPDATES</span><b></b><span>PRIORITY ROUTING</span><b></b><span>FULL TICKET HISTORY</span>
     </section>
 
     <section id="services" class="section">
@@ -115,11 +124,16 @@
       <div class="login-intro"><span class="eyebrow">SERVICE DESK ACCESS</span><h2>Ready to raise a support request?</h2><p>Sign in to submit a ticket, review your support requests and access the service desk.</p></div>
       <div class="auth-card">
         <div class="auth-card-head"><div class="auth-logo">M</div><div><span class="mini-label">SYSTEMS SUPPORT</span><h2 id="authTitle">Login</h2></div></div>
+        <div class="access-switch" role="tablist" aria-label="Choose portal">
+          <button id="userAccessBtn" class="access-tab active" type="button" role="tab" aria-selected="true">User Portal</button>
+          <button id="adminAccessBtn" class="access-tab" type="button" role="tab" aria-selected="false">Admin Portal</button>
+        </div>
+        <p id="portalDescription" class="portal-description">Sign in or create an account to raise and track your support requests.</p>
         <form id="authForm">
           <div id="nameGroup" class="form-group" style="display:none"><label for="authName">Full Name</label><input id="authName" type="text" autocomplete="name" placeholder="Your full name"></div>
           <div class="form-group"><label for="authEmail">Email Address</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@company.com" required></div>
           <div class="form-group"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required></div>
-          <div id="roleGroup" class="form-group" style="display:none"><label for="authRole">Account Type</label><select id="authRole"><option value="User">User</option><option value="Admin">Admin</option></select></div>
+          <div id="adminKeyGroup" class="form-group" style="display:none"><label for="adminRegistrationKey">Administrator Registration Key</label><input id="adminRegistrationKey" type="password" autocomplete="off" placeholder="Enter the private admin key"></div>
           <button id="authSubmit" class="primary-btn full-btn" type="submit">Login</button>
         </form>
         <p id="authToggle" class="auth-toggle">Don't have an account? <a href="#">Register</a></p>
@@ -155,6 +169,7 @@
         <div class="form-group"><label for="name">Name</label><input id="name" type="text" required></div>
         <div class="form-group"><label for="department">Department</label><select id="department" required><option value="">Select department</option><option>ICT</option><option>Finance</option><option>Human Resources</option><option>Administration</option><option>Operations</option><option>Sales</option><option>Other</option></select></div>
       </div>
+      <div class="form-group"><label for="category">What do you need help with?</label><select id="category" required><option value="">Select a category</option><option>Hardware</option><option>Software</option><option>Network</option><option>Access &amp; Account</option><option>Email &amp; Collaboration</option><option>General Support</option></select></div>
       <div class="form-group"><label for="problem">Problem Description</label><textarea id="problem" rows="5" required placeholder="Describe the technical problem..."></textarea></div>
       <div class="form-group"><label>Priority</label><div class="priority-options"><label class="priority"><input type="radio" name="priority" value="Low" checked> Low</label><label class="priority"><input type="radio" name="priority" value="Medium"> Medium</label><label class="priority"><input type="radio" name="priority" value="High"> High</label></div></div>
       <button type="submit" class="primary-btn">Submit Support Ticket</button>
@@ -165,7 +180,7 @@
   <section class="tickets-section">
     <div class="tickets-header"><div><span class="eyebrow">TICKET MANAGEMENT</span><h2>Support Tickets</h2></div><input id="searchTicket" type="search" placeholder="Search tickets..."></div>
     <div class="filters"><select id="filterStatus"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option></select><select id="filterPriority"><option value="">All priorities</option><option>Low</option><option>Medium</option><option>High</option></select><select id="filterDepartment"><option value="">All departments</option><option>ICT</option><option>Finance</option><option>Human Resources</option><option>Administration</option><option>Operations</option><option>Sales</option><option>Other</option></select><button id="clearFilters" class="clear-btn">Clear</button><button id="exportCSV" class="export-btn" style="display:none">Export CSV</button></div>
-    <div class="table-container"><table><thead><tr><th>Ticket</th><th>Name</th><th>Department</th><th>Problem</th><th>Priority</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="ticketTable"></tbody></table></div>
+    <div class="table-container"><table><thead><tr><th>Ticket</th><th>Name</th><th>Department</th><th>Category</th><th>Problem</th><th>Priority</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="ticketTable"></tbody></table></div>
   </section>
 
   <section id="adminSection" class="admin-section" style="display:none">
@@ -176,6 +191,140 @@
   </section>
 </section>
 
-<script src="script.js"></script>
+<script src="script.js?v=5"></script>
+<!-- TICKET DETAILS MODAL -->
+<div id="ticketDetailsModal" class="ticket-modal" style="display:none;">
+
+  <div class="ticket-modal-content">
+
+    <button id="closeTicketDetails" class="modal-close" type="button">
+      &times;
+    </button>
+
+    <div class="ticket-details-header">
+
+      <div>
+        <span class="eyebrow">SYSTEMS SUPPORT</span>
+
+        <h2 id="detailsTicketTitle">
+          Ticket Details
+        </h2>
+
+        <p id="detailsTicketNumber">
+          Ticket
+        </p>
+      </div>
+
+      <div class="ticket-detail-actions">
+
+        <button
+          id="printTicket"
+          class="secondary-btn"
+          type="button">
+          🖨 Print Ticket
+        </button>
+
+        <button
+          id="downloadTicket"
+          class="primary-btn"
+          type="button">
+          ↓ Download Ticket
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TICKET INFORMATION -->
+
+    <div class="ticket-details-grid">
+
+      <div class="detail-card">
+        <span>Requester</span>
+        <strong id="detailsName">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Department</span>
+        <strong id="detailsDepartment">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Category</span>
+        <strong id="detailsCategory">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Priority</span>
+        <strong id="detailsPriority">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Status</span>
+        <strong id="detailsStatus">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Created</span>
+        <strong id="detailsCreated">—</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Resolved</span>
+        <strong id="detailsResolved">—</strong>
+      </div>
+
+    </div>
+
+
+    <!-- PROBLEM -->
+
+    <div class="problem-card">
+
+      <span class="eyebrow">
+        PROBLEM DESCRIPTION
+      </span>
+
+      <p id="detailsProblem">
+        —
+      </p>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="events-card">
+
+      <div class="events-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            ACTIVITY
+          </span>
+
+          <h3>
+            Ticket Timeline
+          </h3>
+
+        </div>
+
+      </div>
+
+      <div id="ticketEvents" class="ticket-events">
+
+        <p>
+          Loading activity...
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 </body>
 </html>
